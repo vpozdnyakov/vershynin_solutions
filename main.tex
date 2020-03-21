@@ -336,11 +336,11 @@ $$ \sum \mathbb P \{ d_i \geq C_i \log n \} \leq n e^{-d} \left(\frac{e d}{C_i \
 
 Note that there exists $C_d$ such that $d \leq C_d \log n$ and then
 
-$$n e^{-C_d \log n} \left(\frac{e C_d}{C_i}\right)^{C_i \log n} = n^{C_i + C_d + 1} \left(\frac{C_d}{C_i}\right)^{C_i \log n} \leq 0.1$$
+$$n e^{-C_d \log n} \left(\frac{e C_d \log n}{C_i \log n}\right)^{C_i \log n} = n^{C_i - C_d + 1} \left(\frac{C_d}{C_i}\right)^{C_i \log n} \leq 0.1$$
 
 Hence, the statement holds for any $C_i$ such that
 
-$$C_i \geq \frac{C_d \log n + \log n + \log 10}{\log n } \left[W \left(\frac{C_d \log n + \log n + \log 10}{C_d e \log n}\right)\right]^{-1}$$
+$$C_i \geq \frac{-C_d \log n + \log n + \log 10}{\log n } \left[W \left(\frac{-C_d \log n + \log n + \log 10}{C_d e \log n}\right)\right]^{-1}$$
 
 where $W(\cdot)$ is the product log function.
 
