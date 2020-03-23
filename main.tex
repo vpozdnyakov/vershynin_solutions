@@ -5,6 +5,8 @@
 \usepackage[margin=3cm]{geometry}
 \usepackage{hyperref}
 
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\cov}{cov}
 \setlength{\parindent}{0pt}
 
 \author{Vitaliy Pozdnyakov}
@@ -98,12 +100,12 @@ Then
 $$
 \begin{gathered}
     \exp(x^2/2) = \exp(0^2/2) + \frac{\exp(0^2/2)0}{1!}x^1 + \frac{\exp(0^2/2)(0^2+1)}{2!}x^2 + \frac{\exp(0^2/2)0(0^2+3)}{3!}x^3 + \dots\\ 
-    = 1 + \frac{x^2}{2} + \frac{x^4}{8} + \frac{x^8}{384} + O(x^8)
+    = 1 + \frac{x^2}{2} + \frac{x^4}{8} + \frac{x^6}{384} + O(x^8)
 \end{gathered}$$
 
 Obviously,
 
-$$1 + \frac{x^2}{2} + \frac{x^4}{24} + \frac{x^6}{720} + O(x^8) \leq 1 + \frac{x^2}{2} + \frac{x^4}{8} + \frac{x^8}{384} + O(x^8)$$
+$$1 + \frac{x^2}{2} + \frac{x^4}{24} + \frac{x^6}{720} + O(x^8) \leq 1 + \frac{x^2}{2} + \frac{x^4}{8} + \frac{x^6}{384} + O(x^8)$$
 
 Thus,
 
@@ -313,7 +315,7 @@ $$\frac{X-\lambda}{\sqrt \lambda} \to \mathcal N(0, 1) \text{ in distribution.}$
 
 Rewrite the RV $X$ as a sum $Z_1 + \dots + Z_N$ where $Z_i \sim Pois(\lambda/N)$ and apply Lindeberg-Levy central limit theorem
 
-$$\frac{X - \mathbb E X}{\sqrt{Var(X)}} = \frac{X - N \mathbb E Z_i}{\sqrt{N Var(Z_i)}} = \frac{X-\lambda}{\sqrt \lambda} \to \mathcal N(0, 1) \text{ as } N \to \infty$$
+$$\frac{X - \mathbb E X}{\sqrt{\Var(X)}} = \frac{X - N \mathbb E Z_i}{\sqrt{N \Var(Z_i)}} = \frac{X-\lambda}{\sqrt \lambda} \to \mathcal N(0, 1) \text{ as } N \to \infty$$
 
 \section{Exercise 2.4.2 (1 cc)}
 
@@ -323,10 +325,10 @@ Consider a random graph $G \sim G(n,p)$ with expected degrees $d = O(\log n)$. S
 
 \subsection{Solution}
 
-Since $d_i > 0$ and $n > 0$, then for any $i$ we have $d_i = O(\log n) \equiv \exists C_i: d_i \leq C_i \log n$ and we need to prove the following statement
+Since $d_i \geq 0$ and $n > 0$, then for any $i$ we have $d_i = O(\log n) \equiv \exists C_i: d_i \leq C_i \log n$ and we need to prove the following statement
 $$\mathbb P \{ \forall i : d_i \leq C_i \log n \} \geq 0.9$$
 
-where $C_i$ is a constant. We can rewrite that probability as
+where $C_i$ is a constant. We can rewrite probability of the opposite case as
 
 $$\mathbb P \{ \exists i : d_i \geq C_i \log n \} \leq \sum \mathbb P \{ d_i \geq C_i \log n \} \leq 0.1$$
 
@@ -363,5 +365,99 @@ Hence, the statement holds for any $C_i$ such that
 $$C_i \geq \frac{(\log n - C_d + \log 10)\log \log n}{\log n} \left[W\left( \frac{\log n - C_d + \log 10}{C_d e} \right)\right]^{-1}$$
 
 where $W(\cdot)$ is the product log function.
+
+\section{Exercise 3.2.6 (1 cc)}
+(Distance between independent isotropic vectors)
+
+Let $X$ and $Y$ be independent, mean zero, isotropic random vectors in $\mathbb R^n$. Check that
+
+$$\mathbb E \Vert X - Y \Vert^2_2 = 2n$$
+
+\subsection{Solution}
+
+$$\mathbb E \Vert X - Y \Vert^2_2 = \mathbb E \left[\sum (X_i - Y_i)^2\right] = \sum (\mathbb E X_i^2 - \mathbb E X_iY_i + \mathbb E Y_i^2)$$
+
+$\mathbb E X_i^2 = \mathbb E Y_i^2 = 1$ by isotropy, $\mathbb E X_i Y_i = \mathbb E X_i\mathbb E Y_i$ by independence and $\mathbb EX_i = \mathbb E Y_i = 0$ by task description. Thereby,
+
+$$\mathbb E \Vert X - Y \Vert^2_2 = \sum (1 - 0 + 1) = 2n$$
+
+\section{ Exercise 3.3.1 (1 cc) }
+
+Show that the spherically distributed random vector $X$ is
+isotropic. Argue that the coordinates of $X$ are not independent.
+
+\subsection{Solution}
+
+\section{ Exercise 3.3.3 (2 cc) }
+
+(Rotation invariance)
+
+Deduce the following properties from the rotation invariance of the normal distribution.
+
+(a) Consider a random vector $g \sim \mathcal N(0,I_n)$ and a fixed vector $u \in \mathbb R^n$. Then $ \langle g, u \rangle \sim \mathcal N(0, \Vert u \Vert^2_2)$
+
+(b) Consider independent random variables $X_i \sim \mathcal N(0,\sigma_i^2)$. Then $\sum X_i \sim \mathcal N(0, \sigma^2)$ where $\sigma^2 = \sum \sigma_i^2$
+
+(c) Let $G$ be an $m \times n$ Gaussian random matrix, i.e. the entries of $G$ are independent $\mathcal N(0,1)$ random variables. Let $u \in \mathbb R^n$ be a fixed unit vector. Then $Gu \sim \mathcal N(0, I_m)$.
+
+\subsection{Solution (a)}
+
+Note that $\langle g, u \rangle = \sum g_iu_i$ where $g_iu_i \sim \mathcal N (0, u_i^2)$ by summation property of Gaussian distribution and then
+
+$$\mathbb E \langle g, u \rangle = \sum \mathbb E g_iu_i = 0$$
+
+$$\Var \langle g, u \rangle = \sum \Var g_iu_i = \sum u_i^2 = \Vert u \Vert^2_2$$
+
+Thereby, 
+
+$$\langle g, u \rangle \sim \mathcal N \left(\sum \mathbb E g_iu_i, \sum \Var g_iu_i \right) = \mathcal N(0, \Vert u \Vert^2_2)$$
+
+\subsection{Solution (b)}
+
+Consider the sum $Z = X + Y$ where $X \sim \mathcal N(0, \sigma_X^2)$ and $Y \sim \mathcal N(0, \sigma_Y^2)$, then
+
+\begin{equation*}
+    \begin{aligned}
+        f_Z(z) = & \int_{-\infty}^{+\infty} f(z-x)f(x)dx \\
+        = & \int_{-\infty}^{+\infty} \frac{1}{\sigma_Y\sqrt{2 \pi}} \exp \left[ -\frac{(z - x)^2}{2 \sigma_Y^2} \right] \frac{1}{\sigma_X\sqrt{2 \pi}} \exp \left[ -\frac{x^2}{2 \sigma_X^2} \right] dx \\
+        = & [\dots] = \frac{1}{\sqrt{\sigma_X^2 + \sigma_Y^2}\sqrt{2 \pi}} \exp \left[ -\frac{z^2}{2 (\sigma_X^2 + \sigma_Y^2)} \right]
+    \end{aligned}
+\end{equation*}
+
+Thereby $\sum X_i \sim \mathcal N(0, \sigma^2)$ where $\sigma^2 = \sum \sigma_i^2$
+
+\subsection{Solution (c)}
+
+Denote $g_{ij}$ as an entry of the matrix $G$ and $v_i$ as an entry of the vector $Gu$
+
+$$
+\begin{pmatrix}
+    v_1 \\
+    v_2 \\
+    \dots \\
+    v_m
+\end{pmatrix} :=
+Gu = 
+\begin{pmatrix}
+    g_{11} & g_{12} & \dots & g_{1n} \\
+    g_{21} & g_{22} & \dots & g_{2n} \\
+    \dots & \dots & \dots & \dots \\
+    g_{m1} & g_{m2} & \dots & g_{mn}
+\end{pmatrix}
+\begin{pmatrix}
+    u_1 \\
+    u_2 \\
+    \dots \\
+    u_n
+\end{pmatrix}
+$$
+
+Then $v_i = g_{i1}u_1 + g_{i2}u_2 + \dots + g_{in}u_n \sim \mathcal N (0, \Vert u \Vert^2_2)$ by solution (a) and (b) and since $u$ is an unit vector we obtain that $v_i \sim \mathcal N (0, 1)$. Entries $g_{ij}$ are independent, then $\forall i \neq j: \cov(v_i, v_j) = 0$. Thereby $Gu \sim \mathcal N (0, I_n)$.
+
+\section{Exercise 3.3.4}
+
+(Characterization of normal distribution)
+
+Let $X$ be a random vector in $\mathbb R^n$. Show that $X$ has a multivariate normal distribution if and only if every one-dimensional marginal $\langle X, \theta \rangle$, $\theta \in \mathbb R^n$, has a (univariate) normal distribution.
 
 \end{document}
