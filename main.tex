@@ -32,7 +32,7 @@ Notation:
 
 \section{Exercise 2.1.4 (1 cc)}
 
-Let $g \sim N(0, 1)$. Show that for all $t \geq 1$, we have
+Let $g \sim \mathcal N(0, 1)$. Show that for all $t \geq 1$, we have
 $$\mathbb E g^2 \mathbf 1\{g>t\} = t \frac{1}{\sqrt{2 \pi}}e^{-{t^2}/{2}} + \mathbb P\{g>t\} \leq \left(t+\frac{1}{t}\right)\frac{1}{\sqrt{2 \pi}}e^{-{t^2}/{2}}$$
 
 \subsection{Solution}
@@ -414,7 +414,7 @@ $$\langle g, u \rangle \sim \mathcal N \left(\sum \mathbb E g_iu_i, \sum \Var g_
 
 \subsection{Solution (b)}
 
-Consider the sum $Z = X + Y$ where $X \sim \mathcal N(0, \sigma_X^2)$ and $Y \sim \mathcal N(0, \sigma_Y^2)$, then
+Consider the PDF $f_Z(z)$ where $Z = X + Y$ with independent $X \sim \mathcal N(0, \sigma_X^2)$ and $Y \sim \mathcal N(0, \sigma_Y^2)$
 
 \begin{equation*}
     \begin{aligned}
@@ -424,7 +424,7 @@ Consider the sum $Z = X + Y$ where $X \sim \mathcal N(0, \sigma_X^2)$ and $Y \si
     \end{aligned}
 \end{equation*}
 
-Thereby $\sum X_i \sim \mathcal N(0, \sigma^2)$ where $\sigma^2 = \sum \sigma_i^2$
+Thereby $Z \sim \mathcal N(0, \sigma_X^2 + \sigma_Y^2)$ and consequently $\sum X_i \sim \mathcal N(0, \sigma^2)$ where $\sigma^2 = \sum \sigma_i^2$
 
 \subsection{Solution (c)}
 
@@ -452,12 +452,117 @@ Gu =
 \end{pmatrix}
 $$
 
-Then $v_i = g_{i1}u_1 + g_{i2}u_2 + \dots + g_{in}u_n \sim \mathcal N (0, \Vert u \Vert^2_2)$ by solution (a) and (b) and since $u$ is an unit vector we obtain that $v_i \sim \mathcal N (0, 1)$. Entries $g_{ij}$ are independent, then $\forall i \neq j: \cov(v_i, v_j) = 0$. Thereby $Gu \sim \mathcal N (0, I_n)$.
+Then $v_i = g_{i1}u_1 + g_{i2}u_2 + \dots + g_{in}u_n \sim \mathcal N (0, \Vert u \Vert^2_2)$ by solution (a) and (b). Since $u$ is a unit vector we obtain that $v_i \sim \mathcal N (0, 1)$. Entries $g_{ij}$ are independent, then entries $v_i$ are independent too and consequently $\forall i \neq j: \cov(v_i, v_j) = 0$. Thereby $Gu \sim \mathcal N (0, I_n)$.
 
-\section{Exercise 3.3.4}
+\section{Exercise 3.3.4 (3 cc)}
 
 (Characterization of normal distribution)
 
 Let $X$ be a random vector in $\mathbb R^n$. Show that $X$ has a multivariate normal distribution if and only if every one-dimensional marginal $\langle X, \theta \rangle$, $\theta \in \mathbb R^n$, has a (univariate) normal distribution.
+
+\subsection{Solution}
+
+\section{Exercise 4.4.2 (1 cc)}
+
+Let $x \in \mathbb R^n$ and $ \mathcal N$ be an $\varepsilon$-net of the sphere $S^{n-1}$. Show that
+
+$$\sup_{y \in \mathcal N} \langle x, y \rangle \leq \Vert x \Vert_2 \leq \frac{1}{1-\varepsilon}\sup_{y \in \mathcal N}\langle x, y \rangle$$
+
+\subsection{Solution}
+
+First, consider the lower bound. By the definition of the dot product we have
+
+$$\langle x, y \rangle = \Vert x \Vert_2 \Vert y \Vert_2 \cos \theta$$
+
+Use the fact that $y \in \mathcal N \subset S^{n-1}$, so $\Vert y \Vert_2 = 1$. Also $\cos \theta \leq 1$, consequently
+$$\sup_{y \in \mathcal N} \langle x, y \rangle \leq \sup_{y \in S^{n-1}} \langle x, y \rangle = \Vert x \Vert_2$$
+
+Next, use the similar approach as in Lemma 4.4.1 for the upper bound. Fix a vector $y \in S^{n-1}$ for which
+
+$$\langle x, y \rangle = \Vert x \Vert_2 $$
+
+and choose $y_0 \in \mathcal N$ that approximates $y$ so that
+
+$$\Vert y - y_0 \Vert_2 \leq \varepsilon$$
+
+By the definition of the dot product, this implies
+
+$$\langle x, y - y_0 \rangle = \Vert x \Vert_2 \Vert y - y_0 \Vert_2 \cos \theta \leq  \Vert x \Vert_2 \varepsilon \cos \theta \leq \Vert x \Vert_2 \varepsilon$$
+
+Using a distributive law, we find that
+
+$$\langle x, y_0 \rangle = \langle x, y \rangle - \langle x, y - y_0 \rangle \geq \Vert x \Vert_2 - \Vert x \Vert_2 \varepsilon = (1 - \varepsilon) \Vert x \Vert_2$$
+
+Dividing both sides of this inequality by $1 - \varepsilon$, we complete the proof.
+
+\section{Exercise 4.4.3 (2 cc)}
+(Quadratic form on a net)
+
+Let $A$ be an $m \times n$ matrix and $\varepsilon \in [0, 1/2)$.
+
+(a) Show that for any $\varepsilon$-net $\mathcal N$ of the sphere $S^{n-1}$ and any $\varepsilon$-net $\mathcal M$ of the sphere $S^{m-1}$, we have
+
+$$\sup_{x \in \mathcal N, y \in \mathcal M} \langle Ax, y \rangle \leq \Vert A \Vert \leq \frac{1}{1 - 2\varepsilon}\sup_{x \in \mathcal N, y \in \mathcal M} \langle Ax, y \rangle$$
+
+(b) Moreover, if $m = n$ and $A$ is symmetric, show that
+
+$$\sup_{x \in \mathcal N} | \langle Ax, x \rangle | \leq \Vert A \Vert \leq \frac{1}{1 - 2\varepsilon}\sup_{x \in \mathcal N} | \langle Ax, x \rangle |$$
+
+\subsection{Solution (a)}
+
+First, consider the lower bound. Using the same explanations as in the Exercise 4.4.2 and the lower bound from Lemma 4.4.1 we obtain
+
+$$\Vert A \Vert \geq\sup_{x \in \mathcal N} \Vert Ax \Vert_2 \geq \sup_{x \in \mathcal N, y \in \mathcal M} \langle Ax, y \rangle$$
+
+Next, again apply Lemma 4.4.1 and the Exercise 4.4.2 for the upper bound
+
+\begin{equation*}
+    \begin{aligned}
+        \Vert A \Vert \leq & \frac{1}{1-\varepsilon}\sup_{x \in \mathcal N} \Vert Ax \Vert_2 \\
+        \leq & \frac{1}{1-\varepsilon}\sup_{x \in \mathcal N}\left( \frac{1}{1-\varepsilon} \sup_{y \in \mathcal M} \langle Ax, y \rangle \right) = \frac{1}{1 - 2\varepsilon + \varepsilon^2}\sup_{x \in \mathcal N, y \in \mathcal M}\langle Ax, y \rangle \\
+        \leq & \frac{1}{1-2\varepsilon}\sup_{x \in \mathcal N, y \in \mathcal M}\langle Ax, y \rangle
+    \end{aligned}
+\end{equation*}
+
+\subsection{Solution (b)}
+
+First, use Lemma 4.4.1 and the Cauchy–Bunyakovsky–Schwarz inequality for the lower bound
+
+\begin{equation*}
+    \begin{aligned}
+        \Vert A \Vert \geq & \sup_{x \in \mathcal N} \Vert A x \Vert_2 = \sup_{x \in \mathcal N} \Vert Ax \Vert_2 \Vert x \Vert_2 &\text{(by the fact that $\Vert x \Vert_2 = 1$)} \\
+        \geq & \sup_{x \in \mathcal N} | \langle Ax,  x \rangle | &\text{(by Cauchy–Bunyakovsky–Schwarz inequality)}
+    \end{aligned}
+\end{equation*}
+
+Next, use the similar approach as in Lemma 4.4.1. Fix a vector $x \in S^{n-1}$ for which
+
+$$\Vert Ax \Vert_2 = \Vert Ax \Vert_2 \Vert x \Vert_2 = |\langle Ax, x \rangle|$$
+
+and choose $x_0 \in \mathcal N$ that approximates $x$ so that
+
+$$\Vert x - x_0 \Vert_2 \leq \varepsilon$$
+
+By the Cauchy–Bunyakovsky–Schwarz inequality, this implies
+
+$$|\langle Ax, x - x_0 \rangle| \leq \Vert Ax \Vert_2 \Vert x - x_0 \Vert_2 \leq \Vert Ax \Vert_2 \varepsilon$$
+
+Using the trianle inequality of absolute value, we find that
+
+$$|\langle Ax, x_0 \rangle| \geq |\langle Ax, x \rangle| - |\langle Ax, x - x_0 \rangle| \geq \Vert Ax \Vert_2 - \Vert Ax \Vert_2 \varepsilon = (1 - \varepsilon) \Vert Ax \Vert_2$$
+
+Dividing both sides of this inequality by $1 - \varepsilon$, we prove that
+
+$$\Vert Ax \Vert_2 \leq \frac{1}{1-\varepsilon}\sup_{x \in \mathcal N}|\langle Ax, x \rangle|$$
+
+Finally, apply the upper bound of Lemma 4.4.1 and complete the prove
+
+\begin{equation*}
+    \begin{aligned}
+        \Vert A \Vert \leq & \frac{1}{1-\varepsilon}\sup_{x \in \mathcal N} \Vert Ax \Vert_2 \\ 
+        \leq & \frac{1}{1-\varepsilon}\sup_{x \in \mathcal N} \left( \frac{1}{1-\varepsilon}\sup_{x \in \mathcal N}|\langle Ax, x \rangle|\right) = \frac{1}{1-2\varepsilon+\varepsilon^2}\sup_{x \in \mathcal N}|\langle Ax, x \rangle| \\
+        \leq & \frac{1}{1-2\varepsilon}\sup_{x \in \mathcal N}|\langle Ax, x \rangle|
+    \end{aligned}
+\end{equation*}
 
 \end{document}
