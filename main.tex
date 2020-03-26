@@ -510,17 +510,17 @@ $$\sup_{x \in \mathcal N} | \langle Ax, x \rangle | \leq \Vert A \Vert \leq \fra
 
 \subsection{Solution (a)}
 
-First, consider the lower bound. Using the same explanations as in the Exercise 4.4.2 and the lower bound from Lemma 4.4.1 we obtain
+First, consider the lower bound. Using the same explanations as in Exercise 4.4.2 and the lower bound from Lemma 4.4.1 we obtain
 
 $$\Vert A \Vert \geq\sup_{x \in \mathcal N} \Vert Ax \Vert_2 \geq \sup_{x \in \mathcal N, y \in \mathcal M} \langle Ax, y \rangle$$
 
-Next, again apply Lemma 4.4.1 and the Exercise 4.4.2 for the upper bound
+Next, again apply Lemma 4.4.1 and Exercise 4.4.2 for the upper bound
 
 \begin{equation*}
     \begin{aligned}
         \Vert A \Vert \leq & \frac{1}{1-\varepsilon}\sup_{x \in \mathcal N} \Vert Ax \Vert_2 \\
-        \leq & \frac{1}{1-\varepsilon}\sup_{x \in \mathcal N}\left( \frac{1}{1-\varepsilon} \sup_{y \in \mathcal M} \langle Ax, y \rangle \right) = \frac{1}{1 - 2\varepsilon + \varepsilon^2}\sup_{x \in \mathcal N, y \in \mathcal M}\langle Ax, y \rangle \\
-        \leq & \frac{1}{1-2\varepsilon}\sup_{x \in \mathcal N, y \in \mathcal M}\langle Ax, y \rangle
+        \leq & \frac{1}{1-\varepsilon}\sup_{x \in \mathcal N}\left( \frac{1}{1-\varepsilon} \sup_{y \in \mathcal M} \langle Ax, y \rangle \right) = &\frac{1}{1 - 2\varepsilon + \varepsilon^2}\sup_{x \in \mathcal N, y \in \mathcal M}\langle Ax, y \rangle \\
+        \leq & \frac{1}{1-2\varepsilon}\sup_{x \in \mathcal N, y \in \mathcal M}\langle Ax, y \rangle &\text{(since $\varepsilon \in [0,1/2)$)}
     \end{aligned}
 \end{equation*}
 
@@ -560,9 +560,40 @@ Finally, apply the upper bound of Lemma 4.4.1 and complete the prove
 \begin{equation*}
     \begin{aligned}
         \Vert A \Vert \leq & \frac{1}{1-\varepsilon}\sup_{x \in \mathcal N} \Vert Ax \Vert_2 \\ 
-        \leq & \frac{1}{1-\varepsilon}\sup_{x \in \mathcal N} \left( \frac{1}{1-\varepsilon}\sup_{x \in \mathcal N}|\langle Ax, x \rangle|\right) = \frac{1}{1-2\varepsilon+\varepsilon^2}\sup_{x \in \mathcal N}|\langle Ax, x \rangle| \\
-        \leq & \frac{1}{1-2\varepsilon}\sup_{x \in \mathcal N}|\langle Ax, x \rangle|
+        \leq & \frac{1}{1-\varepsilon}\sup_{x \in \mathcal N} \left( \frac{1}{1-\varepsilon}\sup_{x \in \mathcal N}|\langle Ax, x \rangle|\right) = & \frac{1}{1-2\varepsilon+\varepsilon^2}\sup_{x \in \mathcal N}|\langle Ax, x \rangle| \\
+        \leq & \frac{1}{1-2\varepsilon}\sup_{x \in \mathcal N}|\langle Ax, x \rangle| &\text{(since $\varepsilon \in [0,1/2)$)}
     \end{aligned}
 \end{equation*}
+
+\section{Exercise 4.4.4}
+(Deviation of the norm on a net)
+
+Let $A$ be an $m \times n$ matrix, $\mu \in \mathbb R$ and $\varepsilon \in [0,1/2)$. Show that for any $\varepsilon$-net $\mathcal N$ of the sphere $S^{n-1}$, we have
+
+$$\sup_{x \in S^{n-1}}|\Vert Ax \Vert_2 - \mu| \leq \frac{C}{1 - 2\varepsilon}\sup_{x \in \mathcal N}|\Vert Ax \Vert_2 - \mu|$$
+
+\subsection{Solution}
+
+Assume without loss of generality that $\mu = 1$. Obviously $\Vert Ax \Vert_2 - 1 = O(\Vert Ax\Vert_2^2 - 1)$ and that is equivalent $|\Vert Ax \Vert_2 - 1| \leq C |\Vert Ax \Vert_2^2 - 1|$ for some $C>0$. Then
+
+$$\sup_{x \in S^{n-1}}|\Vert Ax \Vert_2 - 1| \leq C\sup_{x \in S^{n-1}}|\Vert Ax \Vert_2^2 - 1|$$
+
+Rewrite $\Vert Ax \Vert_2^2 - 1$ in the quadratic form
+
+$$\Vert Ax \Vert_2^2 - 1 = \langle Rx, x \rangle$$
+
+where $R = A^TA - I_n$. Next, use the definition of the operator norm
+
+$$\sup_{x \in S^{n-1}}|\langle Rx, x \rangle| = \sup_{x \in S^{n-1}} \Vert Rx \Vert_2 = \Vert R \Vert$$
+
+Now apply the result from Exercise 4.4.3 (b)
+
+$$\Vert R \Vert \leq \frac{1}{1-2\varepsilon}\sup_{x \in \mathcal N}|\langle Rx, x \rangle|$$
+
+Finally, union the previous steps into an inequality
+
+$$\sup_{x \in S^{n-1}}|\Vert Ax \Vert_2^2 - 1| \leq \Vert R \Vert \leq \frac{1}{1-2\varepsilon}\sup_{x \in \mathcal N}|\Vert Ax \Vert_2^2 - 1| $$
+
+
 
 \end{document}
