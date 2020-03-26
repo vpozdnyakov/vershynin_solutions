@@ -454,14 +454,6 @@ $$
 
 Then $v_i = g_{i1}u_1 + g_{i2}u_2 + \dots + g_{in}u_n \sim \mathcal N (0, \Vert u \Vert^2_2)$ by solution (a) and (b). Since $u$ is a unit vector we obtain that $v_i \sim \mathcal N (0, 1)$. Entries $g_{ij}$ are independent, then entries $v_i$ are independent too and consequently $\forall i \neq j: \cov(v_i, v_j) = 0$. Thereby $Gu \sim \mathcal N (0, I_n)$.
 
-\section{Exercise 3.3.4 (3 cc)}
-
-(Characterization of normal distribution)
-
-Let $X$ be a random vector in $\mathbb R^n$. Show that $X$ has a multivariate normal distribution if and only if every one-dimensional marginal $\langle X, \theta \rangle$, $\theta \in \mathbb R^n$, has a (univariate) normal distribution.
-
-\subsection{Solution}
-
 \section{Exercise 4.4.2 (1 cc)}
 
 Let $x \in \mathbb R^n$ and $ \mathcal N$ be an $\varepsilon$-net of the sphere $S^{n-1}$. Show that
@@ -555,7 +547,7 @@ Dividing both sides of this inequality by $1 - \varepsilon$, we prove that
 
 $$\Vert Ax \Vert_2 \leq \frac{1}{1-\varepsilon}\sup_{x \in \mathcal N}|\langle Ax, x \rangle|$$
 
-Finally, apply the upper bound of Lemma 4.4.1 and complete the prove
+Finally, apply the upper bound of Lemma 4.4.1 and complete the proof
 
 \begin{equation*}
     \begin{aligned}
@@ -565,7 +557,7 @@ Finally, apply the upper bound of Lemma 4.4.1 and complete the prove
     \end{aligned}
 \end{equation*}
 
-\section{Exercise 4.4.4}
+\section{Exercise 4.4.4 (3 cc)}
 (Deviation of the norm on a net)
 
 Let $A$ be an $m \times n$ matrix, $\mu \in \mathbb R$ and $\varepsilon \in [0,1/2)$. Show that for any $\varepsilon$-net $\mathcal N$ of the sphere $S^{n-1}$, we have
@@ -574,26 +566,26 @@ $$\sup_{x \in S^{n-1}}|\Vert Ax \Vert_2 - \mu| \leq \frac{C}{1 - 2\varepsilon}\s
 
 \subsection{Solution}
 
-Assume without loss of generality that $\mu = 1$. Obviously $\Vert Ax \Vert_2 - 1 = O(\Vert Ax\Vert_2^2 - 1)$ and that is equivalent $|\Vert Ax \Vert_2 - 1| \leq C |\Vert Ax \Vert_2^2 - 1|$ for some $C>0$. Then
-
-$$\sup_{x \in S^{n-1}}|\Vert Ax \Vert_2 - 1| \leq C\sup_{x \in S^{n-1}}|\Vert Ax \Vert_2^2 - 1|$$
-
-Rewrite $\Vert Ax \Vert_2^2 - 1$ in the quadratic form
+Assume without loss of generality that $\mu = 1$. Rewrite $\Vert Ax \Vert_2^2 - 1$ in the quadratic form
 
 $$\Vert Ax \Vert_2^2 - 1 = \langle Rx, x \rangle$$
 
-where $R = A^TA - I_n$. Next, use the definition of the operator norm
+where $R = A^TA - I_n$. Next, use the definition of the operator norm and the result from Exercise 4.4.3 (b)
 
-$$\sup_{x \in S^{n-1}}|\langle Rx, x \rangle| = \sup_{x \in S^{n-1}} \Vert Rx \Vert_2 = \Vert R \Vert$$
+$$\sup_{x \in S^{n-1}}|\langle Rx, x \rangle| = \Vert R \Vert \leq \frac{1}{1-2\varepsilon}\sup_{x \in \mathcal N}|\langle Rx, x \rangle|$$
 
-Now apply the result from Exercise 4.4.3 (b)
+Applying the elementary inequality
 
-$$\Vert R \Vert \leq \frac{1}{1-2\varepsilon}\sup_{x \in \mathcal N}|\langle Rx, x \rangle|$$
+$$\max(|z-1|, |z - 1|^2) \leq |z^2 - 1|, z>0$$
 
-Finally, union the previous steps into an inequality
+for $z = \Vert Ax \Vert_2$, we conclude that
 
-$$\sup_{x \in S^{n-1}}|\Vert Ax \Vert_2^2 - 1| \leq \Vert R \Vert \leq \frac{1}{1-2\varepsilon}\sup_{x \in \mathcal N}|\Vert Ax \Vert_2^2 - 1| $$
+$$|\langle Rx, x \rangle| \leq |\Vert Ax \Vert_2 - 1|$$
 
+And thereby
 
+$$\sup_{x \in S^{n-1}}|\Vert Ax \Vert_2 - 1| \leq \frac{1}{1 - 2\varepsilon}\sup_{x \in \mathcal N}|\Vert Ax \Vert_2 - 1|$$
+
+Reject the assumption $\mu = 1$ and complete the proof.
 
 \end{document}
