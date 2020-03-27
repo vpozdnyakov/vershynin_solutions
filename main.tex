@@ -30,6 +30,9 @@ Notation:
     \item $\prod := \prod_{i=1}^N$
 \end{itemize}
 
+\setcounter{tocdepth}{1}
+\tableofcontents
+
 \section{Exercise 2.1.4 (1 cc)}
 
 Let $g \sim \mathcal N(0, 1)$. Show that for all $t \geq 1$, we have
@@ -366,6 +369,74 @@ $$C_i \geq \frac{(\log n - C_d + \log 10)\log \log n}{\log n} \left[W\left( \fra
 
 where $W(\cdot)$ is the product log function.
 
+\section{Exercise 3.1.4 (3 cc)}
+
+(Expectation of the norm)
+
+(a) Deduce from Theorem 3.1.1 that $\sqrt{n} - CK^2 \leq \mathbb E \Vert X \Vert_2 \leq \sqrt{n} + CK^2$
+
+(b) Can $CK^2$ be replaced by $o(1)$, a quantity that vanishes as $n \to \infty$?
+
+\subsection{Solution (a)}
+
+\begin{equation*}
+    \begin{aligned}
+        |\mathbb E \Vert X \Vert_2 - \sqrt{n}| & = \left\vert \mathbb E \left[\Vert X \Vert_2 -\sqrt{n}\right] \right\vert \\
+        & \leq \mathbb E \left\vert \Vert X \Vert_2 - \sqrt{n} \right\vert & \text{(by Jensen's inequality)} \\
+        & = \left\Vert \Vert X \Vert_2 - \sqrt{n} \right\Vert_{L^1} & \text{(by the definition of $L^p$ norm)} \\
+        & \leq C_1 \left\Vert \Vert X \Vert_2 - \sqrt{n} \right\Vert_{\psi^2}\sqrt{1} & \text{(using (2.15) with $p=1$)} \\
+        & \leq C_2K^2 & \text{(by Theorem 3.1.1)}
+    \end{aligned}
+\end{equation*}
+
+\subsection{Solution (b)}
+
+Let $Y = \frac{1}{n}\sum X_i^2$ then $\mathbb E Y = 1$ and $\Var Y = \sigma^2/n$. Consider the inequality
+
+$$\frac{1+x-(x-1)^2}{2} \leq \sqrt{x} \leq \frac{1+x}{2}$$
+$$\mathbb E \frac{1+Y-(Y-1)^2}{2} \leq \mathbb E\sqrt{Y} \leq \mathbb E \frac{1+Y}{2}$$
+$$1 + \frac{\sigma^2}{2n} \leq \mathbb E\sqrt{Y} \leq 1$$
+
+Thereby 
+$$\lim_{n\to\infty} \frac{\mathbb E \Vert X \Vert_2}{\sqrt{n}} = 1$$
+
+\section{Exercise 3.2.2 (1 cc)}
+
+(Reduction to isotropy)
+
+(a) Let $Z$ be a mean zero, isotropic random vector in $\mathbb R^n$. Let $\mu \in \mathbb R^n$ be a fixed vector and $\Sigma$ be a fixed $n \times n$ positive-semidefinite matrix. Check that the random vector $X := \mu + \Sigma^{1/2}Z$ has mean $\mu$ and covariance matrix $\cov(X) = \Sigma$.
+
+(b) Let $X$ be a random vector with mean $\mu$ and invertible covariance matrix $\Sigma = \cov(X)$. Check that the random vector $Z:=\Sigma^{-1/2}(X-\mu)$ is an isotropic, mean zero random vector.
+
+\subsection{Solution (a)}
+
+$$\mathbb E X = \mathbb E \left[ \mu + \Sigma^{1/2}Z\right] = \mathbb E\mu + \Sigma^{1/2}\mathbb E Z = \mu$$
+
+\begin{equation*}
+    \begin{aligned}
+        \cov(X) & = \mathbb E\left[(X-\mu)(X-\mu)^T\right]\\
+        & = \mathbb E \left[\left(\Sigma^{1/2}Z\right)\left(\Sigma^{1/2}Z\right)^T\right]\\
+        & = \mathbb E \left[\Sigma^{1/2}ZZ^T\left(\Sigma^{1/2}\right)^T\right]\\
+        & = \mathbb E \left[\Sigma^{1/2}\left(\Sigma^{1/2}\right)^T\right]\\
+        & = \mathbb E \left[\Sigma^{1/2}\Sigma^{1/2}\right] = \Sigma
+    \end{aligned}
+\end{equation*}
+
+\subsection{Solution (b)}
+
+$$\mathbb E Z = \mathbb E \left[\Sigma^{-1/2}(X-\mu)\right] = \Sigma^{-1/2}\left[\mathbb E X - \mu\right] = 0$$
+
+\begin{equation*}
+    \begin{aligned}
+        \cov(Z) = \mathbb E ZZ^T & = \mathbb E \left[\Sigma^{-1/2}(X-\mu)(X-\mu)^T\left(\Sigma^{-1/2}\right)^T\right]\\
+        & =  \Sigma^{-1/2}\mathbb E\left[(X-\mu)(X-\mu)^T\right]\left(\Sigma^{-1/2}\right)^T\\
+        & =  \Sigma^{-1/2}\cov(X)\left(\Sigma^{-1/2}\right)^T\\
+        & = \Sigma^{-1/2} \Sigma \left(\Sigma^{-1/2}\right)^T \\
+        & = \Sigma^{-1/2}\Sigma^{-1/2}\Sigma= I_n
+    \end{aligned}
+\end{equation*}
+$$$$
+
 \section{Exercise 3.2.6 (1 cc)}
 (Distance between independent isotropic vectors)
 
@@ -381,13 +452,6 @@ $\mathbb E X_i^2 = \mathbb E Y_i^2 = 1$ by isotropy, $\mathbb E X_i Y_i = \mathb
 
 $$\mathbb E \Vert X - Y \Vert^2_2 = \sum (1 - 0 + 1) = 2n$$
 
-\section{ Exercise 3.3.1 (1 cc) }
-
-Show that the spherically distributed random vector $X$ is
-isotropic. Argue that the coordinates of $X$ are not independent.
-
-\subsection{Solution}
-
 \section{ Exercise 3.3.3 (2 cc) }
 
 (Rotation invariance)
@@ -402,15 +466,17 @@ Deduce the following properties from the rotation invariance of the normal distr
 
 \subsection{Solution (a)}
 
-Note that $\langle g, u \rangle = \sum g_iu_i$ where $g_iu_i \sim \mathcal N (0, u_i^2)$ by summation property of Gaussian distribution and then
+Let $Q$ be an orthogonal matrix such that $Q({u}/{\Vert u \Vert_2}) = [1, 0, \dots, 0]^T$. Next, use the property of the orthogonal matrix
 
-$$\mathbb E \langle g, u \rangle = \sum \mathbb E g_iu_i = 0$$
+$$\langle u, g \rangle = \left\langle Qg, Q u \right\rangle = \Vert u \Vert_2 \left\langle Qg, [1, 0, \dots, 0]^T \right\rangle$$
 
-$$\Var \langle g, u \rangle = \sum \Var g_iu_i = \sum u_i^2 = \Vert u \Vert^2_2$$
+By the rotation invariance we obtain
 
-Thereby, 
+$$Qg \sim \mathcal N(0, I_n) \Rightarrow \left\langle Qg, [1, 0, \dots, 0]^T \right\rangle \sim \mathcal N(0, 1)$$
 
-$$\langle g, u \rangle \sim \mathcal N \left(\sum \mathbb E g_iu_i, \sum \Var g_iu_i \right) = \mathcal N(0, \Vert u \Vert^2_2)$$
+and finally use the property of Gaussian distribution
+
+$$\Vert u \Vert_2 \mathcal N(0, 1) = \mathcal N(0, \Vert u \Vert_2^2)$$
 
 \subsection{Solution (b)}
 
@@ -453,6 +519,141 @@ Gu =
 $$
 
 Then $v_i = g_{i1}u_1 + g_{i2}u_2 + \dots + g_{in}u_n \sim \mathcal N (0, \Vert u \Vert^2_2)$ by solution (a) and (b). Since $u$ is a unit vector we obtain that $v_i \sim \mathcal N (0, 1)$. Entries $g_{ij}$ are independent, then entries $v_i$ are independent too and consequently $\forall i \neq j: \cov(v_i, v_j) = 0$. Thereby $Gu \sim \mathcal N (0, I_n)$.
+
+\section{Exercise 3.3.6 (1 cc)}
+
+Let $G$ be an $m\times n$ Gaussian random matrix, i.e. the entries of $G$ are independent $\mathcal N (0, 1)$ random variables. Let $u, v \in \mathbb R^n$ be unit orthogonal vectors. Prove that $Gu$ and $Gv$ are independent $\mathcal N(0,I_m)$ random vectors.
+
+\subsection{Solution}
+
+Let $Q$ be an orthogonal transformation matrix such that $Qu = [1, 0, \dots, 0]^T$ and $Qv = [0, 1, 0, \dots, 0]^T$ and then
+
+\begin{equation*}
+    \begin{aligned}
+        Gu & = GuQQ^T & \text{(since $Q$ is orthogonal)} \\
+        & = G[1, 0, \dots, 0]^TQ^T \\
+        Gv & = GvQQ^T = G[0, 1, 0, \dots, 0]^TQ^T
+    \end{aligned}
+\end{equation*}
+
+We see that vectors $Gu$ and $Gv$ can be represent as sums of entries from different columns of $G$. If the entries of $G$ are independent then $Gu$ and $Gv$ are independent too. Check the expectations and covariance matrix
+
+$$\mathbb E Gu = u \mathbb E G = u \mathbf 0 = \mathbf 0$$
+$$\mathbb E Gu(Gu)^T = \mathbb E Guu^TG^T = \mathbb E G G^T = I_n$$
+
+\section{Exercise 3.3.9 (2 cc)}
+
+Show that $\{u_i\}^N_{i=1}$ is a tight frame in $\mathbb R^n$ with bound $A$ if and only if $\sum u_iu_i^T = AI_n$.
+
+\subsection{Solution}
+
+Check that the left and right side of the equation $\sum u_iu_i^T = AI_n$ are hold the definition of a tight frame:
+
+$$A\Vert x \Vert_2^2 = \sum \langle u_i, x \rangle^2 \text{ for any $x \in \mathbb R^n$}$$
+
+First, the left side
+
+$$x^TAI_nx = A\Vert x \Vert_2^2$$
+
+Next, the right side
+
+$$x^T\left(\sum u_iu_i^T\right)x = \sum x^Tu_iu_i^Tx = \sum \left(u_i^Tx\right)^Tu_i^Tx = \sum \langle u_i, x \rangle^2$$
+
+\section{Exercise 4.1.1 (1 cc)}
+
+Suppose $A$ is an invertible matrix with singular value decomposition $A = \sum s_i u_i v_i^T$. Check that $A^{-1} = \sum (1/s_i)v_iu_i^T$
+
+\subsection{Solution}
+
+Consider the matrix form of SVD
+
+$$A = U \Sigma V^T, A^{-1} = U \Sigma^{-1} V^T$$
+
+Use the fact that $U$ and $V$ are unitary matrix and check that matrix $A$ is invertible indeed
+
+$$AA^{-1} = V\Sigma U^TU \Sigma^{-1}V^T = V I_n V^T = I_n$$
+
+\section{Exercise 4.1.2 (2 cc)}
+
+Prove the following bound on the singular values $s_i$ of any matrix $A$: $s_i \leq (1/\sqrt{i}) \Vert A \Vert_F$
+
+\subsection{Solution}
+
+Use the definition of the Frobenius norm
+
+\begin{equation*}
+    \begin{aligned}
+        \frac{1}{i} \Vert A \Vert_F^2 = \frac{1}{i}\sum_{j=1}^n s_j^2 & = \frac{1}{i}(s_1^2 + \dots + s_i^2 + \dots + s_n^2) & (\forall i: s_i \geq s_{i+1})\\
+        & \geq \frac{1}{i}(s_i^2 + \dots + s_i^2 + \dots + s_n^2) &\text{(substite the first $i$ terms by $s_i$)}\\
+        & = \frac{1}{i}(is_i^2 + \dots + s_n^2) \\
+        & = s_i^2 + \frac{1}{i}(s_{i+1}^2 + \dots s_n^2) \\
+        & \geq s_i^2
+    \end{aligned}
+\end{equation*}
+
+Thereby
+
+$$s_i^2 \leq \frac{1}{i} \Vert A \Vert_F^2 \Rightarrow s_i \leq \frac{1}{\sqrt{i}} \Vert A \Vert_F$$
+
+\section{Exercise 4.1.3 (2 cc)}
+
+(Best rank k approximation)
+
+Let $A_k$ be the best rank $k$ approximation of a matrix $A$. Express $\Vert A - A_k\Vert^2$ and $\Vert A - A_k \Vert^2_F$ in terms of the singular values $s_i$ of $A$.
+
+\subsection{Solution}
+
+Use the Eckart-Young-Mirsky theorem and obtain
+
+$$\Vert A - A_k \Vert^2 = \Vert V [\Sigma(A) - \Sigma(A_k)] U^T \Vert^2 = \Vert \Sigma(A) - \Sigma(A_k) \Vert_\infty = s_{k+1}^2$$
+
+Use the property of the Frobenius norm $\Vert A \Vert_s = \Vert s \Vert_2$
+
+$$\Vert A - A_k \Vert^2_F = \sum_{i=k+1}^ns_i^2$$
+
+\section{Exercise 4.1.8 (1 cc)}
+
+(Isometries and projections from unitary matrices)
+
+Canonical examples of isometries and projections can be constructed from a fixed unitary matrix $U$. Check that any sub-matrix of $U$ obtained by selecting a subset of columns is an isometry, and any sub-matrix obtained by selecting a subset of rows is a projection.
+
+\subsection{Solution}
+
+Denote $\mathbf u_1, \mathbf u_2, \dots , \mathbf u_n$ as column-vectors in the matrix $U$. Let $V$ be a matrix constructed from a fixed set of columns of $U$ with indexes $\mathbf i = (i_1, i_2, \dots, i_n)$
+
+$$V: = (\mathbf u_{i_1}, \mathbf u_{i_2}, \dots, \mathbf u_{i_n})$$
+
+Check an isometry by the property (c) from Exercise 4.1.4: $\Vert Ax \Vert_2 = \Vert x \Vert_2$ for all $x \in \mathbb R^n$
+
+\begin{equation*}
+    \begin{aligned}
+        \Vert Vx \Vert_2^2 = \langle Vx, Vx \rangle & = \langle V^TVx, x \rangle \\
+        & = \langle I_nx, x \rangle & \text{(since U is unitary)} \\
+        & = \Vert x \Vert_2^2
+    \end{aligned}    
+\end{equation*}
+
+Consequenly $V$ is an isometry. $V^T$ is a subset of rows of $U$ and note that $V$ is an isometry if and only if $V^T$ is a projection.
+
+\section{Exercise 4.2.9 (3 cc)}
+
+(Allowing the centers to be outside K)
+
+In our definition of the covering numbers of $K$, we required that the centers $x_i$ of the balls $B(x_i, \varepsilon)$ that form a covering lie in $K$. Relaxing this condition, define the exterior covering number $\mathcal N^{ext}(K, d, \varepsilon)$ similarly but without requiring that $x_i \in K$. Prove that
+
+$$\mathcal N^{ext}(K, d, \varepsilon) \leq \mathcal N (K, d, \varepsilon) \leq N^{ext}(K, d, \varepsilon/2)$$
+
+\subsection{Solution}
+
+The lower bound follow from the fact that $K \subset T$ where $(T, d)$ is a metric space. Obviously an infimum by the subset can not be less than infimum by the whole set. 
+
+Next, let $x_1, \dots, x_{\mathcal N}$ be centers of balls of the form $B(x_i, \varepsilon/2)$. By the definition of the covering, for each $x_i$ there exists at least one $k_i \in K$ such that $k_i \in B(x_i, \varepsilon/2)$. Apply the trianle inequality
+
+$$B(x_i, \varepsilon/2) \subseteq B(k_i, \varepsilon)$$
+
+and consequently $B({k_i}, \varepsilon), \dots, B(k_{\mathcal N^{ext}}, \varepsilon)$ is an classical (not exterior) covering of size $N^{ext}$. Thereby
+
+$$\mathcal N (K, d, \varepsilon) \leq N^{ext}(K, d, \varepsilon/2)$$
 
 \section{Exercise 4.4.2 (1 cc)}
 
